@@ -1,16 +1,15 @@
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 public class Principal {
-    private static List<String> historial = new ArrayList<>();
+    private static final HistorialTransacciones historial = new HistorialTransacciones();
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner  = new Scanner(System.in);
         ConsultaMoneda moneda = new ConsultaMoneda();
-
+        int i = 0;
         String opciones = """
             Sea bienvenido/a al conversor de moneda :)
-
+            ******************************************
             1.- Dólar >> Peso argentino
             2.- Peso argentino >> Dólar
             3.- Dólar >> Real brasileño
@@ -21,67 +20,86 @@ public class Principal {
             8.- Sol Peruano >> Dólar
             9.- Mostrar historial
             10.- Salir
+            *******************************************         
+            Escoge la opciones a seguir ....
             """;
 
-        int opcion;
-
-        do {
-            System.out.println(opciones);
-            System.out.print("Elija una opción válida: ");
-            opcion = scanner.nextInt();
-
-            switch (opcion) {
-                case 1:
-                    convertirMoneda("USD", "ARS", moneda, scanner);
+        while (i != 10) {
+            System.out.print(opciones);
+            i = scanner.nextInt();
+            switch (i) {
+                case 1 -> {
+                    System.out.println("(USD -> Peso Argentino) - Digite el monto a convertir");
+                    double monto = scanner.nextDouble();
+                    TipoMoneda monedero = moneda.convertirDolarAPesoArgentino(monto);
+                    System.out.println("Conversion realizada: " + monto + " USD a " + monedero.conversion_result() + " ARS");
+                    historial.agregarTransaccion("Conversion realizada: " + monto + " USD a " + monedero.conversion_result() + " ARS");
+                }
+                case 2 -> {
+                    System.out.println("(Peso Argentino -> USD) - Digite el monto a convertir");
+                    double monto = scanner.nextDouble();
+                    TipoMoneda monedero = moneda.convertirPesoArgentinoADolar(monto);
+                    System.out.println("Conversion realizada: " + monto + " ARS a " + monedero.conversion_result() + " USD");
+                    historial.agregarTransaccion("Conversion realizada: " + monto + " ARS a " + monedero.conversion_result() + " USD");
+                }
+                case 3 -> {
+                    System.out.println("Digite el monto a convertir");
+                    double monto = scanner.nextDouble();
+                    TipoMoneda monedero = moneda.convertirDolarARealBrasil(monto);
+                    System.out.println("Conversion realizada: " + monto + " USD a " + monedero.conversion_result() + " BRL");
+                    historial.agregarTransaccion("Conversion realizada: " + monto + " USD a " + monedero.conversion_result() + " BRL");
+                }
+                case 4 -> {
+                    System.out.println("Digite el monto a convertir");
+                    double monto = scanner.nextDouble();
+                    TipoMoneda monedero = moneda.convertirRealBrasilADolar(monto);
+                    System.out.println("Conversion realizada: " + monto + " BRL a " + monedero.conversion_result() + " USD");
+                    historial.agregarTransaccion("Conversion realizada: " + monto + " BRL a " + monedero.conversion_result() + " USD");
+                }
+                case 5 -> {
+                    System.out.println("Digite el monto a convertir");
+                    double monto = scanner.nextDouble();
+                    TipoMoneda monedero = moneda.convertirDolarAPesoColombiano(monto);
+                    System.out.println("Conversion realizada: " + monto + " USD a " + monedero.conversion_result() + " COP");
+                    historial.agregarTransaccion("Conversion realizada: " + monto + " USD a " + monedero.conversion_result() + " COP");
+                }
+                case 6 -> {
+                    System.out.println("Digite el monto a convertir");
+                    double monto = scanner.nextDouble();
+                    TipoMoneda monedero = moneda.convertirPesoColombianoADolar(monto);
+                    System.out.println("Conversion realizada: " + monto + " COP a " + monedero.conversion_result() + " USD");
+                    historial.agregarTransaccion("Conversion realizada: " + monto + " COP a " + monedero.conversion_result() + " USD");
+                }
+                case 7 -> {
+                    System.out.println("Digite el monto a convertir");
+                    double monto = scanner.nextDouble();
+                    TipoMoneda monedero = moneda.convertirDolarASoles(monto);
+                    System.out.println("Conversion realizada: " + monto + " USD a " + monedero.conversion_result() + " PEN");
+                    historial.agregarTransaccion("Conversion realizada: " + monto + " USD a " + monedero.conversion_result() + " PEN");
+                }
+                case 8 -> {
+                    System.out.println("Digite el monto a convertir");
+                    double monto = scanner.nextDouble();
+                    TipoMoneda monedero = moneda.convertirSolesADolar(monto);
+                    System.out.println("Conversion realizada: " + monto + " PEN a " + monedero.conversion_result() + " USD");
+                    historial.agregarTransaccion("Conversion realizada: " + monto + " PEN a " + monedero.conversion_result() + " USD");
+                }
+                case 9 -> {
+                    historial.mostrarHistorial();
+                }
+                case 10 -> {
+                    System.out.println("Gracias!!");
                     break;
-                case 2:
-                    convertirMoneda("ARS", "USD", moneda, scanner);
-                    break;
-                case 3:
-                    convertirMoneda("USD", "BRL", moneda, scanner);
-                    break;
-                case 4:
-                    convertirMoneda("BRL", "USD", moneda, scanner);
-                    break;
-                case 5:
-                    convertirMoneda("USD", "COP", moneda, scanner);
-                    break;
-                case 6:
-                    convertirMoneda("COP", "USD", moneda, scanner);
-                    break;
-                case 7:
-                    convertirMoneda("USD", "PEN", moneda, scanner);
-                    break;
-                case 8:
-                    convertirMoneda("PEN", "USD", moneda, scanner);
-                    break;
-                case 9:
-                    mostrarHistorial();
-                    break;
-                case 10:
-                    System.out.println("Gracias por usar el conversor de moneda. ¡Hasta luego!");
-                    break;
-                default:
-                    System.out.println("Opción no válida. Por favor, elija una opción válida.");
+                }
+                default -> {
+                    System.out.println("Opción invalida!, Elige una de las opciones validas");
+                }
             }
-        } while (opcion != 10);
-    }
-
-    private static void convertirMoneda(String monedaOrigen, String monedaDestino, ConsultaMoneda moneda, Scanner scanner) {
-        System.out.print("Ingrese el monto a convertir: ");
-        double monto = scanner.nextDouble();
-        TipoMoneda tipoMoneda = moneda.convertirMoneda(monedaOrigen);
-        double tasaCambio = tipoMoneda.conversion_rates().get(monedaDestino);
-        double resultado = monto * tasaCambio;
-        System.out.printf("%.2f %s equivale a %.2f %s%n%n", monto, monedaOrigen, resultado, monedaDestino);
-        historial.add(String.format("%.2f %s -> %.2f %s", monto, monedaOrigen, resultado, monedaDestino));
-    }
-
-    private static void mostrarHistorial() {
-        System.out.println("Historial de Conversiones:");
-        for (String conversion : historial) {
-            System.out.println(conversion);
+            System.out.print(".... presione un boton para continuar: ");
+            scanner.next();
+            historial.mostrarHistorial();
+//            System.out.println("\033[H\033[2J");
+//            System.out.flush(); // Segun lei esto limpia la consola cmd
         }
-        System.out.println();
     }
 }
