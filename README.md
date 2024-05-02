@@ -22,34 +22,35 @@ Este es un proyecto de conversor de moneda que utiliza la API pública ExchangeR
 - Gson 2.10.1
 
 
-\## 📁 Como ejecutar al proyecto
+## 📁 Como descargar el proyecto y obtener una ApiKey
 
-**Clona este repositorio en tu máquina local:
+1. **Clona este repositorio en tu máquina local:
 git clone https://github.com/tu-usuario/conversor-de-moneda.git**
 
-**Obtén una clave de API gratuita de ExchangeRate-API.**
+2. **Obtén una clave de API gratuita de [ExchangeRate-API](https://www.exchangerate-api.com/)**
 
-**Reemplaza 'YOUR-API-KEY' en la URL de la API con tu clave de API.**
+3. **Puedes abrirlo desde cualquier editor de texto: Apache NetBeans, IntelliJ IDEA, Eclipse,Visual Studio code**
 
-\## 🛠️ Configuracion del proyecto
+## 🛠️ Configuracion del proyecto
 
-**Reemplaza 'YOUR-API-KEY' en la URL de la API con tu clave de API.**
-private static final String BASE_URL = "https://v6.exchangerate-api.com/v6/YOUR-API-KEY/latest/";
+**Una vez abierto el proyecto reemplaza 'YourApiKey' en la URL de la API con tu clave de API.**
 
-## :arrow_down: Cómo agregar la librería Gson al proyecto
+    private static final String BASE_URL = "https://v6.exchangerate-api.com/v6/YourApiKey/latest/";
+
+### :arrow_down: Cómo agregar la librería Gson al proyecto
 
 1. **Descargar Gson desde Maven Repository:**
-    - Visita la página de [Maven Repository para Gson](https://mvnrepository.com/artifact/com.google.code.gson/gson).
+    - Visita la página de [Maven Repository para Gson](https://mvnrepository.com/artifact/com.google.code.gson/gson/2.10.1).
     - Haz clic en la versión más reciente de Gson.
     - En la página de detalles de la versión, busca el enlace "jar" en la sección "Files" y haz clic en él para descargar el archivo jar de Gson.
 
 2. **Agregar Gson al proyecto en IntelliJ IDEA:**
     - Abre IntelliJ IDEA y tu proyecto.
-    - Haz clic con el botón derecho en la carpeta "libs" en tu proyecto y selecciona "Add as Library".
-    - Selecciona el archivo jar de Gson que acabas de descargar y haz clic en "OK".
+    - Haz clic en *"File"* luego busca y click en *"Project Structure..."* te abrira otra ventana, ve en la pestaña *"Dependencies"*.
+    - Click en el boton *"+"* , luego click en *"JARs or Directories"* , buscas el jar descargado seleccionas y das "*OK"*.
     - IntelliJ IDEA agregará la librería Gson a tu proyecto y podrás usarla en tu código.
 
 ## Autores
 
 | [<img src="" width=115><br><sub>Luis Pumajulca Urbano</sub>](https://github.com/LuisPumajulca)  |
-| :---: | :---: | :---: |
+
